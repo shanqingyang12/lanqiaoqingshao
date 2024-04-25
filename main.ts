@@ -740,7 +740,7 @@ namespace lanqiaoqingshao {
         /**
         * 刷新修改
         */
-        //% blockId="neopixel_show" block="%strip|刷新修改" blockGap=8
+        //% blockId="neopixel_show" block="%strip|刷新" blockGap=8
         //% strip.defl=strip
         //% weight=5
         //% subcategory=WS2812B
@@ -774,7 +774,6 @@ namespace lanqiaoqingshao {
         //% subcategory=WS2812B
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
-           
         }
 
         /**
