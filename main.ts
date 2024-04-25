@@ -732,6 +732,8 @@ namespace lanqiaoqingshao {
         setPixelColor(pixeloffset: number, rgb: number): void {
             a = pixeloffset;
             b = rgb;
+            this.setPixelRGB(a >> 0, b >> 0);
+            ws2812b.sendBuffer(this.buf, this.pin);
         }
 
         /**
@@ -772,7 +774,7 @@ namespace lanqiaoqingshao {
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
             this.setPixelRGB(a>> 0, b >> 0);
-            ws2812b.sendBuffer(this.buf, this.pin);
+            ws2812b.sendBuffer(this.buf, this.pin);  
         }
 
         /**
