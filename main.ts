@@ -99,6 +99,8 @@ const enum IrProtocol {
     NEC = 1,
 }
 
+let a: number, b: number;
+
 //% weight=50 color=#0855AA icon="\uf26c" block="蓝桥青少"
 namespace lanqiaoqingshao {
 
@@ -622,7 +624,7 @@ namespace lanqiaoqingshao {
     }
 
 
-    let a: number, b: number;
+
 
     export class Strip {
         buf: Buffer;
@@ -633,8 +635,7 @@ namespace lanqiaoqingshao {
         _length: number; // number of LEDs
         _mode: NeoPixelMode;
         _matrixWidth: number; // number of leds in a matrix - if any
-        pixeloffset: number;
-        rgb: number;
+
         /**
          * 设置所有灯珠的颜色
          * @param rgb RGB color of the LED
@@ -718,7 +719,7 @@ namespace lanqiaoqingshao {
         }
 
  
-
+   
         /**
          * 给指定灯珠设置颜色
          * @param pixeloffset position of the NeoPixel in the strip
@@ -732,8 +733,6 @@ namespace lanqiaoqingshao {
         setPixelColor(pixeloffset: number, rgb: number): void {
             a = pixeloffset;
             b = rgb;
-            this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
-            ws2812b.sendBuffer(this.buf, this.pin);
         }
 
         /**
@@ -773,8 +772,8 @@ namespace lanqiaoqingshao {
         //% subcategory=WS2812B
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
-            this.setPixelRGB(a>> 0, b >> 0);
-            ws2812b.sendBuffer(this.buf, this.pin);  
+            this.setPixelRGB(a >> 0, b >> 0);
+            ws2812b.sendBuffer(this.buf, this.pin);
         }
 
         /**
@@ -899,7 +898,7 @@ namespace lanqiaoqingshao {
             let blue = unpackB(rgb);
 
             let br = this.brightness;
-            if (br < 255) {
+            if (br>0 && br < 255) {
                 red = (red * br) >> 8;
                 green = (green * br) >> 8;
                 blue = (blue * br) >> 8;
