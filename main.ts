@@ -763,7 +763,7 @@ namespace lanqiaoqingshao {
         //% subcategory=WS2812B
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
-            //ws2812b.sendBuffer(this.buf, this.pin);
+            ws2812b.sendBuffer(this.buf, this.pin);
         }
 
         /**
