@@ -732,7 +732,11 @@ namespace lanqiaoqingshao {
             ws2812b.sendBuffer(this.buf, this.pin);
         }
 
-
+        //% blockId="neopixel_set_pixel_refresh" block="刷新设置"
+        //% strip.defl=strip
+        //% blockGap=8
+        //% weight=3
+        //% subcategory=WS2812B
         show() {
             // only supported in beta
             // ws2812b.setBufferMode(this.pin, this._mode);
@@ -763,7 +767,7 @@ namespace lanqiaoqingshao {
         //% subcategory=WS2812B
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
-            ws2812b.sendBuffer(this.buf, this.pin);
+            //ws2812b.sendBuffer(this.buf, this.pin);
         }
 
         /**
