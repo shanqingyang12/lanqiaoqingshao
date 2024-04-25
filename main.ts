@@ -730,8 +730,6 @@ namespace lanqiaoqingshao {
         //% weight=80
         //% subcategory=WS2812B
         setPixelColor(pixeloffset: number, rgb: number): void {
-            this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
-            ws2812b.sendBuffer(this.buf, this.pin);
             a = pixeloffset;
             b = rgb;
         }
@@ -773,8 +771,8 @@ namespace lanqiaoqingshao {
         //% subcategory=WS2812B
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
-            //this.setPixelRGB(a >> 0, b>> 0);
-            //ws2812b.sendBuffer(this.buf, this.pin);
+            this.setPixelRGB(a>> 0, b >> 0);
+            ws2812b.sendBuffer(this.buf, this.pin);
         }
 
         /**
