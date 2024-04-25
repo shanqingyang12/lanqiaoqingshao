@@ -622,6 +622,7 @@ namespace lanqiaoqingshao {
     }
 
 
+    let a: number, b: number;
 
     export class Strip {
         buf: Buffer;
@@ -632,7 +633,8 @@ namespace lanqiaoqingshao {
         _length: number; // number of LEDs
         _mode: NeoPixelMode;
         _matrixWidth: number; // number of leds in a matrix - if any
-
+        pixeloffset: number;
+        rgb: number;
         /**
          * 设置所有灯珠的颜色
          * @param rgb RGB color of the LED
@@ -715,7 +717,7 @@ namespace lanqiaoqingshao {
             this.show();
         }
 
-
+ 
 
         /**
          * 给指定灯珠设置颜色
@@ -728,6 +730,8 @@ namespace lanqiaoqingshao {
         //% weight=80
         //% subcategory=WS2812B
         setPixelColor(pixeloffset: number, rgb: number): void {
+           a= pixeloffset;
+           b=rgb;
             this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
             ws2812b.sendBuffer(this.buf, this.pin);
         }
@@ -758,7 +762,7 @@ namespace lanqiaoqingshao {
             ws2812b.sendBuffer(this.buf, this.pin);
         }
 
-
+        
         /**
          * 设置灯条亮度. 适用于之后的操作
          * @param brightness a measure of LED brightness in 0-255. eg: 255
@@ -769,6 +773,7 @@ namespace lanqiaoqingshao {
         //% subcategory=WS2812B
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
+            this.setPixelRGB(a >> 0, b>> 0);
             //ws2812b.sendBuffer(this.buf, this.pin);
         }
 
