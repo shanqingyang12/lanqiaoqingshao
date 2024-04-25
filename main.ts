@@ -732,10 +732,12 @@ namespace lanqiaoqingshao {
             ws2812b.sendBuffer(this.buf, this.pin);
         }
 
-        //% blockId="neopixel_set_pixel_refresh" block="刷新设置"
+        /**
+        * 刷新修改
+        */
+        //% blockId="neopixel_show" block="%strip|刷新修改" blockGap=8
         //% strip.defl=strip
-        //% blockGap=8
-        //% weight=3
+        //% weight=5
         //% subcategory=WS2812B
         show() {
             // only supported in beta
