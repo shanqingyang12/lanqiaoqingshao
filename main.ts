@@ -732,7 +732,7 @@ namespace lanqiaoqingshao {
         setPixelColor(pixeloffset: number, rgb: number): void {
             a = pixeloffset;
             b = rgb;
-            this.setPixelRGB(a >> 0, b >> 0);
+            this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
             ws2812b.sendBuffer(this.buf, this.pin);
         }
 
