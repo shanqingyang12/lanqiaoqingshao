@@ -293,14 +293,10 @@ namespace lanqiaoqingshao {
         set_pos(x, page)
         if (_ZOOM) {
             _screen[ind + 1] = b
-            _buf3[0] = 0x40
-            _buf3[1] = _buf3[2] = b
-            pins.i2cWriteBuffer(_I2CAddr, _buf3)
+            _screen[0] = 0x40
         }
         else {
-            _buf2[0] = 0x40
-            _buf2[1] = b
-            pins.i2cWriteBuffer(_I2CAddr, _buf2)
+            _screen[0] = 0x40
         }
     }
 
@@ -334,11 +330,6 @@ namespace lanqiaoqingshao {
                     _screen[ind + 1] = col
             }
         }
-        set_pos(x * 5, y)
-        let ind0 = x * 5 * (_ZOOM + 1) + y * 128
-        let buf = _screen.slice(ind0, ind + 1)
-        buf[0] = 0x40
-        pins.i2cWriteBuffer(_I2CAddr, buf)
     }
 
     /**
@@ -408,6 +399,55 @@ namespace lanqiaoqingshao {
     }
 
     /**
+     * 在任意区域填充像素
+     * @param x1 is X alis, eg: 0
+     * @param y1 is Y alis, eg: 0
+     * @param x2 is X alis, eg: 60
+     * @param y2 is Y alis, eg: 30
+     * @param color is line color, eg: 1
+     */
+    //% subcategory=OLED
+    //% blockId="OLED12864_I2C_FILL" block="区域内填充像素  |x1 %x1|y1 %y1|x2 %x2|y2 %y2|颜色%color"
+    //% weight=73 blockGap=8
+    export function fill(x1: number, y1: number, x2: number, y2: number, color: number) {
+        for (let i = y1; i <= y2; i++) {
+            for (let j = x1; j <= x2; j++) {
+                pixel(j, i, color)
+            }
+        }
+    }
+
+    /**
+     * 清空行
+     * @param y is Y alis, eg: 0
+     */
+    //% subcategory=OLED
+    //% blockId="OLED12864_I2C_CLEAR_LINE" block="清空第%y行"
+    //% weight=62 blockGap=8
+    export function clear_line(y: number) {
+        if (_ZOOM) {
+            hline(0, 0 + (y * 8), 64, 0)
+            hline(0, 1 + (y * 8), 64, 0)
+            hline(0, 2 + (y * 8), 64, 0)
+            hline(0, 3 + (y * 8), 64, 0)
+            hline(0, 4 + (y * 8), 64, 0)
+            hline(0, 5 + (y * 8), 64, 0)
+            hline(0, 6 + (y * 8), 64, 0)
+            hline(0, 7 + (y * 8), 64, 0)
+        }
+        else {
+            hline(0, 0 + (y * 8), 128, 0)
+            hline(0, 1 + (y * 8), 128, 0)
+            hline(0, 2 + (y * 8), 128, 0)
+            hline(0, 3 + (y * 8), 128, 0)
+            hline(0, 4 + (y * 8), 128, 0)
+            hline(0, 5 + (y * 8), 128, 0)
+            hline(0, 6 + (y * 8), 128, 0)
+            hline(0, 7 + (y * 8), 128, 0)
+        }
+
+    }
+    /**
      * 反转显示
      * @param d true: invert / false: normal, eg: true
      */
@@ -439,14 +479,13 @@ namespace lanqiaoqingshao {
     export function clear2() {
         _screen.fill(0)
         _screen[0] = 0x40
-        draw()
     }
 
     /**
      * 开启屏幕
      */
     //% blockId="OLED12864_I2C_ON" block="开启屏幕"
-    //% weight=62 blockGap=8
+    //% weight=61 blockGap=8
     //% subcategory=OLED
     export function on2() {
         cmd1(0xAF)
@@ -456,7 +495,7 @@ namespace lanqiaoqingshao {
      * 关闭屏幕
      */
     //% blockId="OLED12864_I2C_OFF" block="关闭屏幕"
-    //% weight=61 blockGap=8
+    //% weight=60 blockGap=8
     //% subcategory=OLED
     export function off2() {
         cmd1(0xAE)
@@ -503,6 +542,7 @@ namespace lanqiaoqingshao {
         cmd2(0xD6, 1)    // zoom on
         cmd1(0xAF)       // SSD1306_DISPLAYON
         clear2()
+        draw()
         _ZOOM = 1
     }
 
@@ -1671,26 +1711,18 @@ namespace lanqiaoqingshao {
 
     let i2cAddr = 0x57;
     /**
-    * Read the measured distance in centimeters
-    */
-    export function fnReadCm(i2cAddr: number): number {
-        let cm: number;
-        pins.i2cWriteNumber(i2cAddr, 0X01, NumberFormat.UInt8BE, false)
-        basic.pause(200)
-        let readbuf = pins.i2cReadBuffer(i2cAddr, pins.sizeOf(NumberFormat.UInt8LE) * 3,false)
-        cm = (readbuf[0] * 65535 + readbuf[1] * 256 + readbuf[2]) / 1000 / 10;
-        cm = Math.round(cm * 100) / 100;
-        basic.pause(200)
-        return (cm)
-    }
-    /**
      * 读取超声波测量距离
      */
     //% subcategory=超声波
     //% blockId="readcm" block="测量距离(cm)"
     //% weight=90  
     export function readcm(): number {
-        let cm: number = fnReadCm(i2cAddr);
+        let cm: number;
+        pins.i2cWriteNumber(i2cAddr, 0X01, NumberFormat.UInt8BE, false)
+        basic.pause(100)
+        let readbuf = pins.i2cReadBuffer(i2cAddr, pins.sizeOf(NumberFormat.UInt8LE) * 3, false)
+        cm = (readbuf[0] * 65535 + readbuf[1] * 256 + readbuf[2]) / 1000 / 10;
+        cm = Math.round(cm * 100) / 100;
         return (cm)
     }
 
