@@ -422,7 +422,7 @@ namespace lanqiaoqingshao {
      * @param y is Y alis, eg: 0
      */
     //% subcategory=OLED
-    //% blockId="OLED12864_I2C_CLEAR_LINE" block="清空第%y行"
+    //% blockId="OLED12864_I2C_CLEAR_LINE" block="清空%y行"
     //% weight=62 blockGap=8
     export function clear_line(y: number) {
         if (_ZOOM) {
