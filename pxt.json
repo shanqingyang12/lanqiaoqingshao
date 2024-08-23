@@ -1,0 +1,25 @@
+{
+    "name": "lanqiaoqingshao",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "ws2812b": "github:microsoft/pxt-ws2812b#v0.1.1",
+        "microphone": "*"
+    },
+    "files": [
+        "main.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "6.0.28",
+        "targetId": "microbit"
+    },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj"
+}
