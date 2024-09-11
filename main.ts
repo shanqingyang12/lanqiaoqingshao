@@ -98,7 +98,14 @@ const enum IrProtocol {
     //% block="NEC"
     NEC = 1,
 }
-
+enum PingUnit {
+    //% block="mm"
+    MicroSeconds,
+    //% block="cm"
+    Centimeters,
+    //% block="inches"
+    Inches
+}
 let a: number, b: number;
 
 //% weight=50 color=#0855AA icon="\uf26c" block="蓝桥青少"
@@ -1710,22 +1717,31 @@ namespace lanqiaoqingshao {
     }
 
     let i2cAddr_hc_sr04 = 0x57;
+
     /**
      * 读取超声波测量距离
      */
     //% subcategory=超声波
-    //% blockId="readcm" block="超声波测量距离(cm)"
+    //% blockId=ultrasonic_sensor block="获取超声波数据  | trig %trig| echo %echo| 数据单位 %unit"
     //% weight=90  
-    export function readcm(): number {
-        let cm: number;
-        pins.i2cWriteNumber(i2cAddr_hc_sr04, 0X01, NumberFormat.UInt8BE, false)
-        basic.pause(100)
-        let readbuf = pins.i2cReadBuffer(i2cAddr_hc_sr04, pins.sizeOf(NumberFormat.UInt8LE) * 3, false)
-        cm = (readbuf[0] * 65536 + readbuf[1] * 256 + readbuf[2]) / 1000 / 10;
-        cm = Math.round(cm * 100) / 100;
-        return (cm)
-    }
+    export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 500): number {
+        // send pulse
+        pins.setPull(trig, PinPullMode.PullNone);
+        pins.digitalWritePin(trig, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(trig, 1);
+        control.waitMicros(10);
+        pins.digitalWritePin(trig, 0);
 
+        // read pulse
+        const d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
+
+        switch (unit) {
+            case PingUnit.Centimeters: return Math.idiv(d, 58);
+            case PingUnit.Inches: return Math.idiv(d, 148);
+            default: return d;
+        }
+    }
 
 
     let i2cAddr_tof = 0x29
