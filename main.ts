@@ -1722,7 +1722,7 @@ namespace lanqiaoqingshao {
      * 读取超声波测量距离
      */
     //% subcategory=超声波
-    //% blockId=ultrasonic_sensor block="获取超声波数据  | trig %trig| echo %echo| 数据单位 %unit"
+    //% blockId=ultrasonic_sensor block="获取超声波数据  | Trig %trig| Echo %echo| 数据单位 %unit"
     //% weight=90  
     export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 500): number {
         // send pulse
