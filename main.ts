@@ -99,7 +99,7 @@ const enum IrProtocol {
     NEC = 1,
 }
 enum PingUnit {
-    //% block="mm"
+    //% block="μs"
     MicroSeconds,
     //% block="cm"
     Centimeters,
