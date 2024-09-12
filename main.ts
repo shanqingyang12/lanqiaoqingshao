@@ -1720,8 +1720,8 @@ namespace lanqiaoqingshao {
 
     /**
      * 读取超声波测量距离
-     * @param trig ,eg:P4
-     * @param echo ,eg:P6
+     * @param trig ,eg:DigitalPin.P4
+     * @param echo ,eg:DigitalPin.P6
      */
     //% subcategory=超声波
     //% blockId=ultrasonic_sensor block="获取超声波数据  | Trig %trig| Echo %echo| 数据单位 %unit"
