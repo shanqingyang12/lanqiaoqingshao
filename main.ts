@@ -1554,7 +1554,7 @@ namespace lanqiaoqingshao {
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
-    //% weight=90
+    //% weight=90 blockGap=8
     export function connectIrReceiver(
         pin: DigitalPin,
         protocol: IrProtocol
@@ -1727,7 +1727,7 @@ namespace lanqiaoqingshao {
      */
     //% subcategory=超声波
     //% blockId=ultrasonic_sensor block="获取超声波数据  | Trig %trig| Echo %echo| 数据单位 %unit"
-    //% weight=90  
+    //% weight=90  blockGap=8
     export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 600): number {
         // send pulse
         pins.setPull(trig, PinPullMode.PullNone);
