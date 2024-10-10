@@ -1728,7 +1728,7 @@ namespace lanqiaoqingshao {
     //% subcategory=超声波
     //% blockId=ultrasonic_sensor block="获取超声波数据  | Trig %trig| Echo %echo| 数据单位 %unit"
     //% weight=90  blockGap=8
-    export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 600): number {
+    export function ping(trig = DigitalPin.P4, echo = DigitalPin.P6, unit: PingUnit, maxCmDistance = 600): number {
         // send pulse
         pins.setPull(trig, PinPullMode.PullNone);
         pins.digitalWritePin(trig, 0);
