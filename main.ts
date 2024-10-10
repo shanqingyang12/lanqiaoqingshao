@@ -1721,16 +1721,14 @@ namespace lanqiaoqingshao {
 
     /**
      * 读取超声波测量距离
-     * @param trig describe parameter here ,eg:DigitalPin.P4
-     * @param echo describe parameter here ,eg:DigitalPin.P6
+     * @param Trig describe parameter here ,eg:DigitalPin.P4
+     * @param Echo describe parameter here ,eg:DigitalPin.P6
      * @param unit describe parameter here ,eg:PingUnit.Centimeters
      */
     //% blockId=ultrasonic_sensor block="获取超声波数据  | Trig %trig| Echo %echo| 数据单位 %unit"
     //% weight=90  blockGap=8
     //% subcategory=超声波
-    
-
-    export function ping(trig = DigitalPin.P4, echo = DigitalPin.P6, unit: PingUnit, maxCmDistance = 600): number {
+    export function ping(trig:DigitalPin, echo:DigitalPin, unit: PingUnit, maxCmDistance = 600): number {
         // send pulse
         pins.setPull(trig, PinPullMode.PullNone);
         pins.digitalWritePin(trig, 0);
