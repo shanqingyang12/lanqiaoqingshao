@@ -975,6 +975,7 @@ namespace lanqiaoqingshao {
      * 创建驱动灯条
      * @param pin the pin where the neopixel is connected.
      * @param numleds number of leds in the strip, eg: 24,30,60,64
+     * @param pin describe parameter here, eg: DigitalPin.P12                  
      */
     //% blockId="neopixel_create" block="引脚%pin|灯珠个数%numleds|显示模式%mode"
     //% weight=90 blockGap=8
@@ -1543,7 +1544,7 @@ namespace lanqiaoqingshao {
 
     /**
      * 在指定引脚连接红外接收模块，配置红外协议。
-     * @param pin IR receiver pin, eg: DigitalPin.P0
+     * @param pin IR receiver pin, eg: DigitalPin.P14
      * @param protocol IR protocol, eg: IrProtocol.Keyestudio
      */
     //% subcategory=红外遥控
@@ -1720,14 +1721,14 @@ namespace lanqiaoqingshao {
 
     /**
      * 读取超声波测量距离
-     * @param trig ,eg:DigitalPin.P4
-     * @param echo ,eg:DigitalPin.P6
-     * @param unit ,eg:PingUnit.cm
+     * @param trig describe parameter here ,eg:DigitalPin.P4
+     * @param echo describe parameter here ,eg:DigitalPin.P6
+     * @param unit describe parameter here ,eg:PingUnit.Centimeters
      */
     //% subcategory=超声波
     //% blockId=ultrasonic_sensor block="获取超声波数据  | Trig %trig| Echo %echo| 数据单位 %unit"
     //% weight=90  
-    export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 500): number {
+    export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 600): number {
         // send pulse
         pins.setPull(trig, PinPullMode.PullNone);
         pins.digitalWritePin(trig, 0);
