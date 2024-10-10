@@ -1548,13 +1548,13 @@ namespace lanqiaoqingshao {
        * @param pin IR receiver pin, eg: DigitalPin.P14
        * @param protocol IR protocol, eg: IrProtocol.Keyestudio
        */
-    //% subcategory=红外遥控
-    //% blockId="makerbit_infrared_connect_receiver"
     //% block="红外接收器引脚 %pin|设置解码方式为%protocol|"
+    //% blockId="makerbit_infrared_connect_receiver"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
     //% weight=90 blockGap=8
+    //% subcategory=红外遥控
     export function connectIrReceiver(
         pin: DigitalPin,
         protocol: IrProtocol
@@ -1725,9 +1725,11 @@ namespace lanqiaoqingshao {
      * @param echo describe parameter here ,eg:DigitalPin.P6
      * @param unit describe parameter here ,eg:PingUnit.Centimeters
      */
-    //% subcategory=超声波
     //% blockId=ultrasonic_sensor block="获取超声波数据  | Trig %trig| Echo %echo| 数据单位 %unit"
     //% weight=90  blockGap=8
+    //% subcategory=超声波
+    
+
     export function ping(trig = DigitalPin.P4, echo = DigitalPin.P6, unit: PingUnit, maxCmDistance = 600): number {
         // send pulse
         pins.setPull(trig, PinPullMode.PullNone);
