@@ -1542,11 +1542,12 @@ namespace lanqiaoqingshao {
         };
     }
 
+  
     /**
-     * 在指定引脚连接红外接收模块，配置红外协议。
-     * @param pin IR receiver pin, eg: DigitalPin.P14
-     * @param protocol IR protocol, eg: IrProtocol.Keyestudio
-     */
+       * 在指定引脚连接红外接收模块，配置红外协议。
+       * @param pin IR receiver pin, eg: DigitalPin.P14
+       * @param protocol IR protocol, eg: IrProtocol.Keyestudio
+       */
     //% subcategory=红外遥控
     //% blockId="makerbit_infrared_connect_receiver"
     //% block="红外接收器引脚 %pin|设置解码方式为%protocol|"
@@ -1554,7 +1555,6 @@ namespace lanqiaoqingshao {
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
     //% weight=90
-
     export function connectIrReceiver(
         pin: DigitalPin,
         protocol: IrProtocol
